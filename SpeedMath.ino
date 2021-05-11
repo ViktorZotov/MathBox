@@ -26,9 +26,9 @@ String odesilanaHodnota;
 
 unsigned long time=0;
 unsigned long inicio=0;
-int m, mu=0,md=0;             
-int s, su=0,sd=0;
-int c,cu,cd=0;
+int m, mu=0,md=0;	//inicializace minut             
+int s, su=0,sd=0;	//inicializace sekund 
+int c,cu,cd=0;		//inicializace milisekund
 byte intento=0;
 
 char level;
@@ -49,10 +49,10 @@ boolean temporizar = false;
 
 char cifra_jugador[4]; //Stores the number of the player
 
-String numero_jugador = String(); //Almacena las 4 cifras del jugador
+String numero_jugador = String(); 
 String sNumero_jugador;
 
-int pos = 0;           //proměnná obsahující pozici motoru (úhel natočení)
+int pos = 180;           //proměnná obsahující pozici motoru (úhel natočení)
 int cuenta=0;
 int i,j,x;
 int puntos,famas=0;
@@ -100,7 +100,7 @@ void game_over()
             lcd.print(cd);
             lcd.print(cu); 
             delay(1000);
-            for(pos = 50; pos <= 180; pos += 1) //je od úhlu 0 do úhlu 180
+            for(pos = 180; pos >= 75; pos -= 1) //je od úhlu 0 do úhlu 180
             {
               myservo.write(pos);  //natočení motoru na aktuální úhel
               delay(15);           //chvilka čekání než se motor natočí
@@ -278,6 +278,11 @@ void setup()
     espData("AT+CWJAP=\""+ mySSID +"\",\""+ myPWD +"\"", 1000, DEBUG);   //Connect to WiFi network
     espData("AT+CIFSR", 1000, DEBUG);
     myservo.attach(12);   //tento motor je připojen na pin 12
+    for(pos = 50; pos <= 180; pos += 1) //je od úhlu 0 do úhlu 180
+    {
+      myservo.write(pos);  //natočení motoru na aktuální úhel
+      delay(15);           //chvilka čekání než se motor natočí
+    }
     lcd.createChar(1,sad); 
     lcd.init(); 
     lcd.backlight();   
