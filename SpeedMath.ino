@@ -71,8 +71,6 @@ byte rowPins[ROWS] = {7,6,5,4}; //Filas(pines del 9 al 6)
 byte colPins[COLS] = {3,2,9,8}; //Columnas (pines del 5 al 2)
 Keypad keypad = Keypad( makeKeymap(keys), rowPins, colPins, ROWS, COLS );
 
-
-
 void game_over()
 {
   temporizar=false;
@@ -90,7 +88,7 @@ void game_over()
             lcd.setCursor(4,0);
             lcd.print("Victory!");
             lcd.setCursor(0,1);
-            lcd.print("Time: ");
+            lcd.print(" Time: ");
             lcd.print(md);
             lcd.print(mu);
             lcd.print(":");
@@ -269,26 +267,25 @@ void timer()
 
 void setup() 
   {
-    // put your setup code here, to run once:
     Serial.begin(9600);
     Serial1.begin(115200);
-    lcd.print("Connecting to database");
-    espData("AT+RST", 1000, DEBUG);                      //Reset the ESP8266 module
-    espData("AT+CWMODE=1", 1000, DEBUG);                 //Set the ESP mode as station mode
-    espData("AT+CWJAP=\""+ mySSID +"\",\""+ myPWD +"\"", 1000, DEBUG);   //Connect to WiFi network
-    espData("AT+CIFSR", 1000, DEBUG);
     myservo.attach(12);   //tento motor je připojen na pin 12
     for(pos = 50; pos <= 180; pos += 1) //je od úhlu 0 do úhlu 180
     {
       myservo.write(pos);  //natočení motoru na aktuální úhel
       delay(15);           //chvilka čekání než se motor natočí
     }
+    lcd.print("Connecting to database");
+    espData("AT+RST", 1000, DEBUG);                      //Reset the ESP8266 module
+    espData("AT+CWMODE=1", 1000, DEBUG);                 //Set the ESP mode as station mode
+    espData("AT+CWJAP=\""+ mySSID +"\",\""+ myPWD +"\"", 1000, DEBUG);   //Connect to WiFi network
+    espData("AT+CIFSR", 1000, DEBUG);
     lcd.createChar(1,sad); 
     lcd.init(); 
     lcd.backlight();   
     choose();    //Displays the select level mode
-  }
-  
+  }  
+
 //********************************************************
 void verificar()
 {
