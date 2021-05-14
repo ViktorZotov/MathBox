@@ -16,8 +16,8 @@ byte sad[8] = {
   B10001,
 };
 
-String mySSID = "Zotovs_Home_Net";       // WiFi SSID
-String myPWD = "george9928viktor2011marina1977"; // WiFi Password
+String mySSID = "robotika";       // WiFi SSID
+String myPWD = "nasratpanove"; // WiFi Password
 String myAPI = "Q2M7K0RJ8WZMD3ME";   // API Key
 String myHOST = "api.thingspeak.com";
 String myPORT = "80";
@@ -26,9 +26,9 @@ String odesilanaHodnota;
 
 unsigned long time=0;
 unsigned long inicio=0;
-int m, mu=0,md=0;	//inicializace minut             
-int s, su=0,sd=0;	//inicializace sekund 
-int c,cu,cd=0;		//inicializace milisekund
+int m, mu=0,md=0;  //inicializace minut             
+int s, su=0,sd=0; //inicializace sekund 
+int c,cu,cd=0;    //inicializace milisekund
 byte intento=0;
 
 char level;
@@ -98,7 +98,7 @@ void game_over()
             lcd.print(cd);
             lcd.print(cu); 
             delay(1000);
-            for(pos = 180; pos >= 75; pos -= 1) //je od úhlu 0 do úhlu 180
+            for(pos = 180; pos >= 120; pos -= 1) //je od úhlu 0 do úhlu 180
             {
               myservo.write(pos);  //natočení motoru na aktuální úhel
               delay(15);           //chvilka čekání než se motor natočí
@@ -270,7 +270,7 @@ void setup()
     Serial.begin(9600);
     Serial1.begin(115200);
     myservo.attach(12);   //tento motor je připojen na pin 12
-    for(pos = 50; pos <= 180; pos += 1) //je od úhlu 0 do úhlu 180
+    for(pos = 120; pos <= 180; pos += 1) //je od úhlu 0 do úhlu 180
     {
       myservo.write(pos);  //natočení motoru na aktuální úhel
       delay(15);           //chvilka čekání než se motor natočí
